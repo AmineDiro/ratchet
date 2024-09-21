@@ -151,12 +151,14 @@ impl RenderableGraph {
         d.push(fname.as_ref());
         let mut f = NamedTempFile::new().expect("Failed to create temp file.");
         render_to(&mut f, self)?;
+        println!("rendered plot to : {:?}", &d);
         Command::new("dot")
             .arg("-Tsvg")
             .arg(f.path())
             .arg("-o")
             .arg(d)
             .output()?;
+
         Ok(())
     }
 }

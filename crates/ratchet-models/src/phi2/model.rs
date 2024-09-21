@@ -13,8 +13,8 @@ use {crate::ratchet_from_gguf_web, crate::TensorMap};
 
 #[derive(Debug)]
 pub struct DecoderLayer {
-    ln: LayerNorm,
     self_attn: PhiSelfAttention,
+    ln: LayerNorm,
     mlp: MLP,
 }
 

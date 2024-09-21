@@ -14,13 +14,18 @@ crate-type = ["cdylib", "lib"]
 [package.metadata.wasm-pack.profile.dev.wasm-bindgen]
 debug-js-glue = true
 demangle-name-section = true
-dwarf-debug-info = true 
+dwarf-debug-info = true
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ['-O3', '--enable-simd']
 
 [dependencies]
-ratchet = { path = "../ratchet-core" }
+ratchet = { path = "../ratchet-core", features = [
+    "default",
+    "testing",
+    "plotting",
+    "rand",
+] }
 ratchet-nn = { path = "../ratchet-nn" }
 ratchet-loader = { path = "../ratchet-loader" }
 byteorder.workspace = true
@@ -34,10 +39,12 @@ realfft = { workspace = true }
 ndarray = { workspace = true }
 cfg-if = { workspace = true }
 serde = { workspace = true }
-tokenizers = { version = "0.19.1", default-features = false, features=["unstable_wasm"] }
+tokenizers = { version = "0.19.1", default-features = false, features = [
+    "unstable_wasm",
+] }
 lazy_static = { workspace = true }
 web-time = { workspace = true }
-clap = { workspace = true, features = [ "derive" ] }
+clap = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 half.workspace = true
 image = { workspace = true }
@@ -45,11 +52,11 @@ pollster.workspace = true
 wasm-bindgen-futures = "0.4.42"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = { workspace = true }  
+wasm-bindgen = { workspace = true }
 serde-wasm-bindgen = "0.4.5"
 ratchet-hub = { path = "../ratchet-hub" }
 tsify = "0.4.5"
-js-sys = { workspace = true } 
+js-sys = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 ratchet = { path = "../ratchet-core", features = ["pyo3"] }
@@ -70,4 +77,3 @@ env_logger = { workspace = true }
 ratchet = { path = "../ratchet-core", features = ["pyo3"] }
 pyo3 = "0.20.2"
 numpy = "0.20.0"
-
